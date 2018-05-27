@@ -207,7 +207,7 @@ def test(logger, dataset, t, job_uuid, epoch, val_loss, visualize_score=True, vi
     import matplotlib.pyplot as plt
     from scipy.misc import imresize
 
-    n_videos = {'avenue': 21, 'enter': 6, 'exit': 4, 'ped1': 36, 'ped2': 12}
+    n_videos = {'avenue': 21, 'enter': 6, 'exit': 4, 'ped1': 36, 'ped2': 12, 'floripa': 19}
     test_dir = os.path.join(video_root_path, '{0}/testing_h5_t{1}'.format(dataset, t))
     job_folder = os.path.join('/share/clean/{}/jobs'.format(dataset), job_uuid)
     model_filename = 'model_snapshot_e{:03d}_{:.6f}.h5'.format(epoch, val_loss)
@@ -224,7 +224,7 @@ def test(logger, dataset, t, job_uuid, epoch, val_loss, visualize_score=True, vi
         filesize = f['data'].shape[0]
         f.close()
 
-        gt_vid_raw = np.loadtxt('/share/data/groundtruths/gt_{0}_vid{1:02d}.txt'.format(dataset, videoid+1))
+        #gt_vid_raw = np.loadtxt('/share/data/groundtruths/gt_{0}_vid{1:02d}.txt'.format(dataset, videoid+1))
 
         logger.debug("Predicting using {}".format(os.path.join(job_folder, model_filename)))
         X_test = HDF5Matrix(filepath, 'data')
@@ -269,17 +269,17 @@ def test(logger, dataset, t, job_uuid, epoch, val_loss, visualize_score=True, vi
             plt.ylim(0, 1)
             plt.xlim(1, score_vid.shape[0]+1)
 
-            try:
-                for event in range(gt_vid_raw.shape[1]):
-                    start = int(gt_vid_raw[0, event])
-                    end = int(gt_vid_raw[1, event]) + 1
-                    gt_vid[start:end] = 1
-                    plt.fill_between(np.arange(start, end), 0, 1, facecolor='red', alpha=0.4)
-            except IndexError:
-                start = int(gt_vid_raw[0])
-                end = int(gt_vid_raw[1])
-                gt_vid[start:end] = 1
-                plt.fill_between(np.arange(start, end), 0, 1, facecolor='red', alpha=0.4)
+            #try:
+            #    for event in range(gt_vid_raw.shape[1]):
+            #        start = int(gt_vid_raw[0, event])
+            #        end = int(gt_vid_raw[1, event]) + 1
+            #        gt_vid[start:end] = 1
+            #        plt.fill_between(np.arange(start, end), 0, 1, facecolor='red', alpha=0.4)
+            #except IndexError:
+            #    start = int(gt_vid_raw[0])
+            #    end = int(gt_vid_raw[1])
+            #    gt_vid[start:end] = 1
+            #    plt.fill_between(np.arange(start, end), 0, 1, facecolor='red', alpha=0.4)
 
             plt.savefig(os.path.join(save_path, 'scores_{0}_video_{1:02d}.png'.format(dataset, videoid+1)), dpi=300)
             plt.close()
@@ -304,6 +304,6 @@ def test(logger, dataset, t, job_uuid, epoch, val_loss, visualize_score=True, vi
                 plt.savefig(os.path.join(save_path, '{}_err_vid{:02d}_frm{:03d}.png'.format(dataset, videoid+1, idx+1)))
                 plt.clf()
 
-    logger.info("{}: Calculating overall metrics".format(dataset))
-    auc_overall, eer_overall = calc_auc_overall(logger, dataset, n_videos[dataset], save_path)
+    #logger.info("{}: Calculating overall metrics".format(dataset))
+    #auc_overall, eer_overall = calc_auc_overall(logger, dataset, n_videos[dataset], save_path)
 

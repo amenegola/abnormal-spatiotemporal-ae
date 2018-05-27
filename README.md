@@ -25,7 +25,7 @@ Default configuration can be found at `config.yml`. Change it if necessary.
 
 To train the model, just run `python start_train.py`.
 
-Once you have trained the model, you may now run `python start_test.py` after setting the parameters at the beginning of the file (Testing is not implemented yet).
+Once you have trained the model, you may now run `python start_test.py` after setting the parameters at the beginning of the file.
 
 Please cite the following paper if you use their code / paper:
 ```
