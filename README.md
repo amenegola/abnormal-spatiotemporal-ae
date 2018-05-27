@@ -14,16 +14,20 @@ Prerequisites:
 
 You can use the `Dockerfile` provided to build the environment then enter the environment using `nvidia-docker run --rm -it -v HOST_FOLDER:/share DOCKER_IMAGE bash`.
 
-To train the model, just run `python start_train.py`. Default configuration can be found at `config.yml`. You need to prepare video dataset you plan to train/evaluate on. You may get the benchmark dataset videos from respective authors. For each dataset, put the training videos into `VIDEO_ROOT_PATH/DATASET_NAME/training_videos` and testing videos into `VIDEO_ROOT_PATH/DATASET_NAME/testing_videos`. Example structure of training videos for `avenue` dataset:
+First, you need to convert the videos to frame with `convert_video_to_frame.py`. First mkdir a `data` folder and put the folder floripa (request Drive tar.gz file from Author) in it. Run the script. For each dataset, put the training videos into `VIDEO_ROOT_PATH/DATASET_NAME/training_videos` and testing videos into `VIDEO_ROOT_PATH/DATASET_NAME/testing_videos`. Example structure of training videos for `avenue` dataset:
 - `VIDEO_ROOT_PATH/avenue/training_videos`
   - `01.avi`
   - `02.avi`
   - ...
   - `16.avi`
 
-Once you have trained the model, you may now run `python start_test.py` after setting the parameters at the beginning of the file.
+Default configuration can be found at `config.yml`. Change it if necessary. 
 
-Please cite the following paper if you use our code / paper:
+To train the model, just run `python start_train.py`.
+
+Once you have trained the model, you may now run `python start_test.py` after setting the parameters at the beginning of the file (Testing is not implemented yet).
+
+Please cite the following paper if you use their code / paper:
 ```
 @inbook{Chong2017,
   author    = {Chong, Yong Shean and

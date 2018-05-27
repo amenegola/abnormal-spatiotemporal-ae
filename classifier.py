@@ -55,7 +55,7 @@ def compile_model(model, loss, optimizer):
     model.compile(loss=loss, optimizer=opt)
 
 
-def train(dataset, job_folder, logger, video_root_path='/share/data/videos'):
+def train(dataset, job_folder, logger, video_root_path='data'):
     """Build and train the model
     """
     import yaml
@@ -198,7 +198,7 @@ def calc_auc_overall(logger, dataset, n_vid, save_path):
 
 
 def test(logger, dataset, t, job_uuid, epoch, val_loss, visualize_score=True, visualize_frame=False,
-         video_root_path='/share/data/videos'):
+         video_root_path='data'):
     import numpy as np
     from keras.models import load_model
     import os

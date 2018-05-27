@@ -1,5 +1,5 @@
 
-def calc_mean(dataset, video_root_path='/share/data/videos'):
+def calc_mean(dataset, video_root_path='data'):
     import os
     from skimage.io import imread
     import numpy as np
@@ -22,7 +22,7 @@ def calc_mean(dataset, video_root_path='/share/data/videos'):
     np.save(os.path.join(video_root_path, dataset, 'mean_frame_224.npy'), frame_mean)
 
 
-def subtract_mean(dataset, video_root_path='/share/data/videos'):
+def subtract_mean(dataset, video_root_path='data'):
     import os
     from skimage.io import imread
     import numpy as np
@@ -56,7 +56,7 @@ def subtract_mean(dataset, video_root_path='/share/data/videos'):
         np.save(os.path.join(video_root_path, dataset, 'testing_frames_{}.npy'.format(frame_folder)), testing_frames_vid)
 
 
-def build_h5(dataset, train_or_test, t, video_root_path='/share/data/videos'):
+def build_h5(dataset, train_or_test, t, video_root_path='data'):
     import h5py
     from tqdm import tqdm
     import os
@@ -87,7 +87,7 @@ def build_h5(dataset, train_or_test, t, video_root_path='/share/data/videos'):
     build_volume(train_or_test, num_videos, time_length=t)
 
 
-def combine_dataset(dataset, t, video_root_path='/share/data/videos'):
+def combine_dataset(dataset, t, video_root_path='data'):
     import h5py
     import os
     from tqdm import tqdm
@@ -121,7 +121,7 @@ def combine_dataset(dataset, t, video_root_path='/share/data/videos'):
     output_file.close()
 
 
-def preprocess_data(logger, dataset, t, video_root_path='/share/data/videos'):
+def preprocess_data(logger, dataset, t, video_root_path='data'):
     import os
 
     # Step 1: Calculate the mean frame of all training frames

@@ -3,7 +3,7 @@ import skvideo.io
 from skimage.transform import resize
 from skimage.io import imsave
 
-video_root_path = '/share/data/videos'
+video_root_path = 'data'
 size = (224, 224)
 
 def video_to_frame(dataset, train_or_test):
@@ -24,21 +24,25 @@ def video_to_frame(dataset, train_or_test):
               count += 1
 
 # avenue
-video_to_frame('avenue', 'training')
-video_to_frame('avenue', 'testing')
+#video_to_frame('avenue', 'training')
+#video_to_frame('avenue', 'testing')
 
 # ped1
-video_to_frame('ped1', 'training')
-video_to_frame('ped1', 'testing')
+#video_to_frame('ped1', 'training')
+#video_to_frame('ped1', 'testing')
 
 # ped2
-video_to_frame('ped2', 'training')
-video_to_frame('ped2', 'testing')
+#video_to_frame('ped2', 'training')
+#video_to_frame('ped2', 'testing')
 
 # enter
-video_to_frame('enter', 'training')
-video_to_frame('enter', 'testing')
+#video_to_frame('enter', 'training')
+#video_to_frame('enter', 'testing')
 
 # exit
-video_to_frame('exit', 'training')
-video_to_frame('exit', 'testing')
+#video_to_frame('exit', 'training')
+#video_to_frame('exit', 'testing')
+
+# exit
+video_to_frame('floripa', 'training')
+video_to_frame('floripa', 'testing')
