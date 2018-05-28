@@ -164,10 +164,11 @@ def preprocess_data(logger, dataset, t, video_root_path='data'):
     for train_or_test in ('training', 'testing'):
         try:
             h5_folder = os.path.join(video_root_path, '{}/{}_h5_t{}'.format(dataset, train_or_test, t))
+            print(h5_folder)
             assert(os.path.isdir(h5_folder))
-            num_videos = len(os.listdir(os.path.join(video_root_path, '{}/{}_frames'.format(dataset, train_or_test))))
-            for i in range(num_videos):
-                h5_file = os.path.join(video_root_path, '{0}/{1}_h5_t{2}/{0}_{3:02d}.h5'.format(dataset, train_or_test, t, i+1))
+            list_videos = os.listdir(os.path.join(video_root_path, '{}/{}_frames'.format(dataset, train_or_test)))
+            for video in list_videos:
+                h5_file = os.path.join(video_root_path, '{0}/{1}_h5_t{2}/{0}_{3}.h5'.format(dataset, train_or_test, t, video))
                 assert(os.path.isfile(h5_file))
         except AssertionError:
             logger.info("Step 3/4: Generating volumes for {} {} set".format(dataset, train_or_test))
