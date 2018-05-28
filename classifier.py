@@ -76,7 +76,7 @@ def train(dataset, job_folder, logger, video_root_path='data'):
     time_length = cfg['time_length']
     # shuffle = cfg['shuffle']
 
-    logger.info("Building model of type {} and activation {}".format(model_type, activation))
+    #logger.info("Building model of type {} and activation {}".format(model_type, activation))
     model = get_model(time_length)
     logger.info("Compiling model with {} and {} optimizer".format(loss, optimizer))
     compile_model(model, loss, optimizer)
