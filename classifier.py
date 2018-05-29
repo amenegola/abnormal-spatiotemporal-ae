@@ -239,7 +239,7 @@ def test(logger, dataset, t, job_uuid, epoch, val_loss, visualize_score=True, vi
                 vol_costs[j] = np.linalg.norm(np.squeeze(res[j])-np.squeeze(X_test[j]))
 
             file_name_prefix = 'vol_costs_{0}_video'.format(dataset)
-            np.savetxt(os.path.join(save_path,file_name_prefix+'_'+'%02d'%(videoid+1)+'.txt'),vol_costs)
+            np.savetxt(os.path.join(save_path,file_name_prefix+'_'+video+'.txt'),vol_costs)
 
             logger.debug("Calculating frame reconstruction error")
             raw_costs = imresize(np.expand_dims(vol_costs,1), (filesize+t,1))
@@ -247,17 +247,17 @@ def test(logger, dataset, t, job_uuid, epoch, val_loss, visualize_score=True, vi
             gt_vid = np.zeros_like(raw_costs)
 
             file_name_prefix = 'frame_costs_{0}_video'.format(dataset)
-            np.savetxt(os.path.join(save_path, file_name_prefix+'_'+'%02d'%(videoid+1)+'.txt'), raw_costs)
+            np.savetxt(os.path.join(save_path, file_name_prefix+'_'+video+'.txt'), raw_costs)
 
             score_vid = raw_costs - min(raw_costs)
             score_vid = 1 - (score_vid / max(score_vid))
 
             file_name_prefix = 'frame_costs_scaled_{0}_video'.format(dataset)
-            np.savetxt(os.path.join(save_path, file_name_prefix + '_' + '%02d' % (videoid + 1) + '.txt'), 1-score_vid)
+            np.savetxt(os.path.join(save_path, file_name_prefix + '_' +video+ '.txt'), 1-score_vid)
 
             logger.debug("Plotting frame reconstruction error")
             plt.plot(np.arange(1, raw_costs.shape[0]+1), raw_costs)
-            plt.savefig(os.path.join(save_path, '{}_video_{:02d}_err.png'.format(dataset, videoid+1)))
+            plt.savefig(os.path.join(save_path, '{}_video_{}_err.png'.format(dataset, video)))
             plt.clf()
 
             logger.debug("Plotting regularity scores")
@@ -282,7 +282,7 @@ def test(logger, dataset, t, job_uuid, epoch, val_loss, visualize_score=True, vi
             #    gt_vid[start:end] = 1
             #    plt.fill_between(np.arange(start, end), 0, 1, facecolor='red', alpha=0.4)
 
-            plt.savefig(os.path.join(save_path, 'scores_{0}_video_{1:02d}.png'.format(dataset, videoid+1)), dpi=300)
+            plt.savefig(os.path.join(save_path, 'scores_{0}_video_{1}.png'.format(dataset, video)), dpi=300)
             plt.close()
 
         if visualize_frame:
@@ -302,7 +302,7 @@ def test(logger, dataset, t, job_uuid, epoch, val_loss, visualize_score=True, vi
             for idx in range(filesize+t):
                 plt.imshow(np.squeeze(pixel_costs[idx]), vmin=np.amin(pixel_costs), vmax=np.amax(pixel_costs), cmap='jet')
                 plt.colorbar()
-                plt.savefig(os.path.join(save_path, '{}_err_vid{:02d}_frm{:03d}.png'.format(dataset, videoid+1, idx+1)))
+                plt.savefig(os.path.join(save_path, '{}_err_vid{video}_frm{:03d}.png'.format(dataset, videoid, idx+1)))
                 plt.clf()
 
     #logger.info("{}: Calculating overall metrics".format(dataset))
