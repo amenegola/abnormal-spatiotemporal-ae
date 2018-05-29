@@ -208,17 +208,18 @@ def test(logger, dataset, t, job_uuid, epoch, val_loss, visualize_score=True, vi
     from scipy.misc import imresize
 
     n_videos = {'avenue': 21, 'enter': 6, 'exit': 4, 'ped1': 36, 'ped2': 12, 'floripa': 19}
+    videos = os.listdir("data/floripa/testing_h5_t8/")
     test_dir = os.path.join(video_root_path, '{0}/testing_h5_t{1}'.format(dataset, t))
-    job_folder = os.path.join('/share/clean/{}/jobs'.format(dataset), job_uuid)
+    job_folder = os.path.join('clean/{}/jobs'.format(dataset), job_uuid)
     model_filename = 'model_snapshot_e{:03d}_{:.6f}.h5'.format(epoch, val_loss)
     temporal_model = load_model(os.path.join(job_folder, model_filename))
     save_path = os.path.join(job_folder, 'result')
     os.makedirs(save_path, exist_ok=True)
 
-
-    for videoid in range(n_videos[dataset]):
-        videoname = '{0}_{1:02d}.h5'.format(dataset, videoid+1)
-        filepath = os.path.join(test_dir, videoname)
+    print(videos)
+    for video in videos:
+#        videoname = '{0}_output{1:03d}.h5'.format(dataset, videoid+1)
+        filepath = os.path.join("data/floripa/testing_h5_t8/", video)
         logger.info("==> {}".format(filepath))
         f = h5py.File(filepath, 'r')
         filesize = f['data'].shape[0]
